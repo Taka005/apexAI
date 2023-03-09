@@ -8,7 +8,7 @@ train_ds = tf.keras.utils.image_dataset_from_directory(
   subset="training",
   seed=123,
   image_size=(735,735),
-  batch_size=32
+  batch_size=64
 )
 
 val_ds = tf.keras.utils.image_dataset_from_directory(
@@ -17,7 +17,7 @@ val_ds = tf.keras.utils.image_dataset_from_directory(
   subset="validation",
   seed=123,
   image_size=(735, 735),
-  batch_size=32
+  batch_size=64
 )
 
 class_names = train_ds.class_names
@@ -50,10 +50,14 @@ model.compile(
     metrics=['accuracy']
 )
 
+model.summary()
+
+epoch = 10
+
 history = model.fit(
   train_ds,
   validation_data=val_ds,
-  epochs=10
+  epochs=epoch
 )
 
 acc = history.history['accuracy']
@@ -64,14 +68,14 @@ val_loss = history.history['val_loss']
 
 plt.figure(figsize=(8, 8))
 plt.subplot(1, 2, 1)
-plt.plot(range(10), acc, label='Training Accuracy')
-plt.plot(range(10), val_acc, label='Validation Accuracy')
+plt.plot(range(epoch), acc, label='Training Accuracy')
+plt.plot(range(epoch), val_acc, label='Validation Accuracy')
 plt.legend(loc='lower right')
 plt.title('Training and Validation Accuracy')
 
 plt.subplot(1, 2, 2)
-plt.plot(range(10), loss, label='Training Loss')
-plt.plot(range(10), val_loss, label='Validation Loss')
+plt.plot(range(epoch), loss, label='Training Loss')
+plt.plot(range(epoch), val_loss, label='Validation Loss')
 plt.legend(loc='upper right')
 plt.title('Training and Validation Loss')
 plt.show()
@@ -89,3 +93,5 @@ print(
     "この画像は {} に {:.2f}％類似しています"
     .format(class_names[np.argmax(score)], 100 * np.max(score))
 )
+
+model.save("model")
