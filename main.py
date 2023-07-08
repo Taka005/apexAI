@@ -4,7 +4,7 @@ import tensorflow as tf
 
 train_ds = tf.keras.utils.image_dataset_from_directory(
   "dataset",
-  validation_split=0.2,
+  validation_split=0.3,
   subset="training",
   seed=123,
   image_size=(735,735),
@@ -13,7 +13,7 @@ train_ds = tf.keras.utils.image_dataset_from_directory(
 
 val_ds = tf.keras.utils.image_dataset_from_directory(
   "dataset",
-  validation_split=0.2,
+  validation_split=0.3,
   subset="validation",
   seed=123,
   image_size=(735, 735),
@@ -52,7 +52,7 @@ model.compile(
 
 model.summary()
 
-epoch = 10
+epoch = 30
 
 history = model.fit(
   train_ds,
