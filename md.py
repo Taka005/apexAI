@@ -15,7 +15,7 @@ name = {
   "hemlock": "ヘムロック",
   "knife": "ナイフ",
   "kraber": "クレーバー",
-  "longblow": "ロングボウ",
+  "longbow": "ロングボウ",
   "lstar": "Lスター",
   "mastiff": "マスティフ",
   "mozambique": "モザンビーク",
@@ -36,7 +36,8 @@ name = {
 
 ds = tf.keras.utils.image_dataset_from_directory("dataset")
 
-model = tf.keras.models.load_model("APEX_AI.h5")
+model = tf.keras.models.load_model("model")
+#model = tf.keras.models.load_model("APEX_AI.h5")
 
 model.summary()
 
@@ -53,3 +54,5 @@ print(
     "この画像は {} に {:.2f}％類似しています"
     .format(name[ds.class_names[np.argmax(score)]], 100 * np.max(score))
 )
+
+model.save("APEX_AI.h5")

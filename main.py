@@ -52,7 +52,7 @@ model.compile(
 
 model.summary()
 
-epoch = 30
+epoch = 50
 
 history = model.fit(
   train_ds,
