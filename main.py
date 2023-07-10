@@ -4,7 +4,7 @@ import tensorflow as tf
 
 train_ds = tf.keras.utils.image_dataset_from_directory(
   "dataset",
-  validation_split=0.3,
+  validation_split=0.5,
   subset="training",
   seed=123,
   image_size=(735,735),
@@ -13,7 +13,7 @@ train_ds = tf.keras.utils.image_dataset_from_directory(
 
 val_ds = tf.keras.utils.image_dataset_from_directory(
   "dataset",
-  validation_split=0.3,
+  validation_split=0.5,
   subset="validation",
   seed=123,
   image_size=(735, 735),
@@ -52,7 +52,7 @@ model.compile(
 
 model.summary()
 
-epoch = 50
+epoch = 100
 
 history = model.fit(
   train_ds,
@@ -78,6 +78,7 @@ plt.plot(range(epoch), loss, label='Training Loss')
 plt.plot(range(epoch), val_loss, label='Validation Loss')
 plt.legend(loc='upper right')
 plt.title('Training and Validation Loss')
+plt.savefig("result.png", format="png", dpi=300)
 plt.show()
 
 img = tf.keras.utils.load_img(

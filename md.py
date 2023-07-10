@@ -1,40 +1,38 @@
 import numpy as np
 import tensorflow as tf
 
-name = {
-  "30-30repeater": "30-30リピーター",
-  "alternator": "オルタネーター",
-  "bosek": "ボセック",
-  "car": "CAR",
-  "chargerifle":  "チャージライフル",
-  "devotion": "ディボーション",
-  "eva8": "EVA 8",
-  "flatline": "フラットライン",
-  "g7": "G7スカウト",
-  "havoc": "ハボック",
-  "hemlock": "ヘムロック",
-  "knife": "ナイフ",
-  "kraber": "クレーバー",
-  "longbow": "ロングボウ",
-  "lstar": "Lスター",
-  "mastiff": "マスティフ",
-  "mozambique": "モザンビーク",
-  "nemesis": "ネメシス",
-  "p2020": "P2020",
-  "peacekeeper": "ピースキーパー",
-  "prowler": "プラウラー",
-  "r99": "R99",
-  "r301": "R301",
-  "rampage": "ランページ",
-  "re45": "RE45",
-  "sentinel": "センチネル",
-  "spitfire": "スピットファイア",
-  "tripletake": "トリプルテイク",
-  "volt": "ボルト",
-  "wingman": "ウィングマン"
-}
-
-ds = tf.keras.utils.image_dataset_from_directory("dataset")
+name = [
+  "30-30リピーター",
+  "オルタネーター",
+  "ボセック",
+  "CAR",
+  "チャージライフル",
+  "ディボーション",
+  "EVA 8",
+  "フラットライン",
+  "G7スカウト",
+  "ハボック",
+  "ヘムロック",
+  "ナイフ",
+  "クレーバー",
+  "ロングボウ",
+  "Lスター",
+  "マスティフ",
+  "モザンビーク",
+  "ネメシス",
+  "P2020",
+  "ピースキーパー",
+  "プラウラー",
+  "R99",
+  "R301",
+  "ランページ",
+  "RE45",
+  "センチネル",
+  "スピットファイア",
+  "トリプルテイク",
+  "ボルト",
+  "ウィングマン"
+]
 
 model = tf.keras.models.load_model("model")
 #model = tf.keras.models.load_model("APEX_AI.h5")
@@ -52,7 +50,7 @@ score = tf.nn.softmax(predictions[0])
 
 print(
     "この画像は {} に {:.2f}％類似しています"
-    .format(name[ds.class_names[np.argmax(score)]], 100 * np.max(score))
+    .format(name[np.argmax(score)], 100 * np.max(score))
 )
 
-model.save("APEX_AI.h5")
+model.save("APEX_AI.keras")
